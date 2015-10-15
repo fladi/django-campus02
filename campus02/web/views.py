@@ -117,7 +117,7 @@ class CacheEtagImageView(CsrfExemptMixin, View):
         if 'web:cache/etag' in request.session:
             etag = request.session.get('web:cache/etag')
             age = request.session.get('web:cache/etag/age')
-            if etag == request.META.get('HTTP_IF_NONE_MATCH', None):
+            if '"{etag}"'.format(etag=etag) == request.META.get('HTTP_IF_NONE_MATCH', None):
                 response = HttpResponseNotModified()
                 response['Cache-Control'] = 'public, must-revalidate, max-age={age}'.format(age=age)
                 response['ETag'] = '"{etag}"'.format(etag=etag)
