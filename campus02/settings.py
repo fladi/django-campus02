@@ -24,7 +24,7 @@ DEBUG = 'DJANGO_DEBUG' in os.environ
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['campus02.fladi.at']
 
 
 # Application definition
