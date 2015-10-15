@@ -1,0 +1,45 @@
+{% extends "base/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Cookies</h1>
+  Diese Liste zeigt die akutell an den Webserver übertragenen Cookies an.
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for k, v in cookies.items %}
+    <tr>
+      <td>{{ k }}</td>
+      <td>{{ v }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="page-header">
+  <h1>Cookie setzen</h1>
+  Dieses Formular erlaubt das Setzen eines Cookies.
+</div>
+{% crispy form form.helper %}
+{% endblock %}
+
+{% block stylesheets %}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/smalot-bootstrap-datetimepicker/2.3.4/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smalot-bootstrap-datetimepicker/2.3.4/js/bootstrap-datetimepicker.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('#id_expires').datetimepicker({
+      format: 'yyyy-mm-dd hh:ii:ss'
+    });
+  });
+  </script>
+{% endblock %}

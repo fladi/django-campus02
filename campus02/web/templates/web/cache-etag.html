@@ -1,0 +1,25 @@
+{% extends "base/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}WEB - HTTP - ETag{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>ETag</h1>
+</div>
+
+<p>
+  Der aktuelle Wert des ETags ist:
+  <code>{{ etag }}</code>
+</p>
+<p>
+  Der aktuelle Wert des maximalen Alters im Browser-Cache ist:
+  <code>{{ age }}</code>
+</p>
+<img src="{% url 'web:cache/etag/image' %}">
+<div class="page-header">
+  <h1>ETag setzen</h1>
+</div>
+{% crispy form form.helper %}
+{% endblock %}

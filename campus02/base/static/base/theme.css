@@ -1,0 +1,18 @@
+body {
+  padding-top: 70px;
+  padding-bottom: 30px;
+}
+
+.campus02-dropdown .dropdown-menu {
+  position: static;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.campus02-content > p > .btn {
+  margin: 5px 0;
+}
+
+.campus02-content .navbar .container {
+  width: auto;
+}

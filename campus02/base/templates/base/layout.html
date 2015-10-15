@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+    <title>CAMPUS02 - {% block title %}{% endblock %}</title>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+    <link href="{% static 'base/theme.css' %}" rel="stylesheet">
+  </head>
+  <body role="document">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'base:index' %}">
+            <span class="glyphicon glyphicon-blackboard"></span>
+            CAMPUS02
+          </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-link"></span>
+                WEB
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">HTTP</li>
+                <li><a href="{% url 'web:cache/expires' %}">Expires</a></li>
+                <li><a href="{% url 'web:cache/etag' %}">Etag</a></li>
+                <li><a href="{% url 'web:cache/control' %}">Cache-Control</a></li>
+                <li><a href="{% url 'web:cookies' %}">Cookies</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">HTML</li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">CSS</li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href=""><span class="glyphicon glyphicon-refresh"></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container campus02-content" role="main">
+      {% block content %}{% endblock %}
+    </div>
+    <script src="{% static 'jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "base/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}WEB - HTTP - Expires{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Expires</h1>
+</div>
+
+<p>
+Das aktuelle Expires-Datum (GMT) ist:
+<code>{{ expires|date:"Y-m-d H:i:s" }}</code>
+</p>
+<img src="{% url 'web:cache/expires/image' %}">
+<div class="page-header">
+  <h1>Expires setzen</h1>
+</div>
+{% crispy form form.helper %}
+{% endblock %}
+
+{% block stylesheets %}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/smalot-bootstrap-datetimepicker/2.3.4/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{% endblock %}
+{% block scripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smalot-bootstrap-datetimepicker/2.3.4/js/bootstrap-datetimepicker.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('#id_expires').datetimepicker({
+      format: 'yyyy-mm-dd hh:ii:ss'
+    });
+  });
+  </script>
+{% endblock %}
