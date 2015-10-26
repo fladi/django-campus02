@@ -1,0 +1,22 @@
+{% extends 'base/layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Anmelden</h1>
+</div>
+
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+  Ihr Benutzername und Passwort stimmen nicht überein. Bitte versuchen Sie es erneut.
+</div>
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+  {% csrf_token %}
+  <input type="hidden" name="next" value="{{ next }}" />
+  {{ form|crispy }}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Anmelden</button>
+</form>
+{% endblock %}
