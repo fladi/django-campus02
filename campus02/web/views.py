@@ -16,11 +16,13 @@ from braces.views import CsrfExemptMixin
 
 from . import forms
 
+
 def get_expires(session):
-    if not 'web:cache/expires' in session:
+    if 'web:cache/expires' not in session:
         expires = datetime.now() + timedelta(minutes=2)
         session['web:cache/expires'] = expires
     return session.get('web:cache/expires')
+
 
 class CookieView(FormView):
     template_name = 'web/cookies.html'
@@ -36,6 +38,7 @@ class CookieView(FormView):
         context = super(CookieView, self).get_context_data(**kwargs)
         context['cookies'] = self.request.COOKIES
         return context
+
 
 class CacheExpiresView(FormView):
     template_name = 'web/cache-expires.html'
@@ -56,6 +59,7 @@ class CacheExpiresView(FormView):
         context = super(CacheExpiresView, self).get_context_data(**kwargs)
         context['expires'] = get_expires(self.request.session)
         return context
+
 
 class CacheExpiresImageView(View):
     font = ImageFont.truetype('/usr/share/fonts/dejavu/DejaVuSans.ttf',25)
