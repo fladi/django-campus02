@@ -26,6 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['campus02.fladi.at']
 
+INTERNAL_IPS = os.environ.get('DJANGO_INTERNAL_IPS', '').split(',')
 
 # Application definition
 
