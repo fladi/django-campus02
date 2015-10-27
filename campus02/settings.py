@@ -70,11 +70,28 @@ WSGI_APPLICATION = 'campus02.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': os.environ.get(
+            'DJANGO_DATABASES_DEFAULT_ENGINE',
+            'django.db.backends.sqlite3'
+        ),
+        'NAME': os.environ.get(
+            'DJANGO_DATABASES_DEFAULT_NAME',
+            os.path.join(BASE_DIR, 'db.sqlite3')
+        ),
+        'USER': os.environ.get(
+            'DJANGO_DATABASES_DEFAULT_USER',
+            ''
+        ),
+        'PASSWORD': os.environ.get(
+            'DJANGO_DATABASES_DEFAULT_PASSWORD',
+            ''
+        ),
+        'HOST': os.environ.get(
+            'DJANGO_DATABASES_DEFAULT_HOST',
+            ''
+        ),
     }
 }
 
