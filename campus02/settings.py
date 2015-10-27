@@ -31,7 +31,6 @@ INTERNAL_IPS = os.environ.get('DJANGO_INTERNAL_IPS', '').split(',')
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
@@ -41,6 +40,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'campus02.base',
     'campus02.web',
+    'django.contrib.admin',
 )
 
 MIDDLEWARE_CLASSES = (
