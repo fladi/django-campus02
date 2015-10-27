@@ -22,7 +22,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DJANGO_DEBUG' in os.environ
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 ALLOWED_HOSTS = ['campus02.fladi.at']
 
@@ -36,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'django_extensions',
     'crispy_forms',
     'campus02.base',
@@ -44,6 +47,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
