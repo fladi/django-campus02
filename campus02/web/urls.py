@@ -15,4 +15,5 @@ urlpatterns = patterns(
     url(r'^cache/control$', views.CacheControlView.as_view(), name='cache/control'),
     url(r'^cache/control/image$', views.CacheControlImageView.as_view(), name='cache/control/image'),
     url(r'^session$', views.SessionView.as_view(), name='session'),
+    url(r'^http2$', views.Http2View.as_view(), name='http2'),
 )

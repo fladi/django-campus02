@@ -1,0 +1,19 @@
+{% extends "base/layout.html" %}
+
+{% block title %}WEB - HTTP - HTTP/2{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>HTTP/2</h1>
+</div>
+
+{% if http2 %}
+<div class="alert alert-success" role="alert">
+  Die Seite wurde über <strong>HTTP/2</strong> übertragen.
+</div>
+{% else %}
+<div class="alert alert-info" role="alert">
+  Die Seite wurde über <strong>HTTP/1.1</strong> übertragen.
+</div>
+{% endif %}
+{% endblock %}

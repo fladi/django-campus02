@@ -200,3 +200,10 @@ class SessionView(TemplateView):
         return context
 
 
+class Http2View(TemplateView):
+    template_name = 'web/http2.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Http2View, self).get_context_data(**kwargs)
+        context['http2'] = self.request.META['SERVER_PROTOCOL'] == 'HTTP/2'
+        return context
