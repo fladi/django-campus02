@@ -14,4 +14,5 @@ urlpatterns = patterns(
     url(r'^cache/etag/image$', views.CacheEtagImageView.as_view(), name='cache/etag/image'),
     url(r'^cache/control$', views.CacheControlView.as_view(), name='cache/control'),
     url(r'^cache/control/image$', views.CacheControlImageView.as_view(), name='cache/control/image'),
+    url(r'^session$', views.SessionView.as_view(), name='session'),
 )

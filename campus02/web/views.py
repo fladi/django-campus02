@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse_lazy as reverse
 from django.http import HttpResponse, HttpResponseNotModified
 from django.utils.http import http_date
 from django.views.generic import View
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
 from braces.views import CsrfExemptMixin
@@ -188,3 +189,14 @@ class CacheControlImageView(View):
         img.save(response, format='PNG')
         img.close()
         return response
+
+
+class SessionView(TemplateView):
+    template_name = 'web/session.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SessionView, self).get_context_data(**kwargs)
+        context['session'] = self.request.session
+        return context
+
+

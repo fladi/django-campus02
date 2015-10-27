@@ -1,0 +1,40 @@
+{% extends "base/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}WEB - HTTP - Session{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Session</h1>
+</div>
+
+{% if user.is_authenticated %}
+<div class="alert alert-success" role="alert">
+  Benutzer <strong>{{ user.username }}</strong> ist in dieser Session angemeldet!
+</div>
+{% else %}
+<div class="alert alert-info" role="alert">
+  Benutzer ist in der Session nicht angemeldet!
+</div>
+{% endif %}
+<p>
+  Die aktuellen Name/Wert-Paare in der Session sind:
+</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for k, v in session.items %}
+    <tr>
+      <td>{{ k }}</td>
+      <td>{{ v }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
