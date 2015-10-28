@@ -24,15 +24,19 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Key</th>
-      <th>Value</th>
+      <th>Name</th>
+      <th>Wert</th>
     </tr>
   </thead>
   <tbody>
   {% for k, v in session.items %}
     <tr>
-      <td>{{ k }}</td>
-      <td>{{ v }}</td>
+      <td>
+        <strong><samp>{{ k }}</samp></strong>
+      </td>
+      <td>
+        <samp>{{ v }}</samp>
+      </td>
     </tr>
   {% endfor %}
   </tbody>
