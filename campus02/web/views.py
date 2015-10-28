@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime, timedelta
+from collections import OrderedDict
 from six.moves import cStringIO
 from PIL import ImageFont, Image, ImageDraw
 
@@ -36,7 +37,7 @@ class CookieView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(CookieView, self).get_context_data(**kwargs)
-        context['cookies'] = self.request.COOKIES
+        context['cookies'] = OrderedDict(sorted(self.request.COOKIES.items()))
         return context
 
 
@@ -200,7 +201,7 @@ class SessionView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SessionView, self).get_context_data(**kwargs)
-        context['session'] = self.request.session
+        context['session'] = OrderedDict(sorted(self.request.session.items()))
         return context
 
 
