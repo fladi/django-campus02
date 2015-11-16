@@ -10,8 +10,10 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+from IPy import IP
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -28,7 +30,24 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 ALLOWED_HOSTS = ['campus02.fladi.at']
 
-INTERNAL_IPS = os.environ.get('DJANGO_INTERNAL_IPS', '').split(',')
+
+class IPList(list):
+
+    def __init__(self, ips):
+        for ip in ips:
+            self.append(IP(ip))
+
+    def __contains__(self, ip):
+        try:
+            for net in self:
+                if ip in net:
+                    return True
+        except:
+            pass
+        return False
+
+if 'DJANGO_INTERNAL_IPS' in os.environ:
+    INTERNAL_IPS = IPList(os.environ.get('DJANGO_INTERNAL_IPS').split(','))
 
 # Application definition
 
