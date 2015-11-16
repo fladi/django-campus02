@@ -33,14 +33,15 @@ ALLOWED_HOSTS = ['campus02.fladi.at']
 
 class IPList(list):
 
-    def __init__(self, ips):
-        for ip in ips:
-            self.append(IP(ip))
+    def __init__(self, addresses):
+        super(IPList, self).__init__()
+        for address in addresses:
+            self.append(IP(address))
 
-    def __contains__(self, ip):
+    def __contains__(self, address):
         try:
             for net in self:
-                if ip in net:
+                if address in net:
                     return True
         except:
             pass
