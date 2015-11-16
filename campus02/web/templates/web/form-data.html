@@ -1,0 +1,102 @@
+{% extends "base/layout.html" %}
+
+{% block title %}WEB - HTML - Formulardaten{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>HTTP-Request Body</h1>
+</div>
+
+{% if request.method == 'POST' %}
+<pre>
+{{ request.body }}
+</pre>
+
+<div class="page-header">
+  <h1>Formulardaten</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Feld</th>
+      <th>Wert</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for k, v in request.POST.items %}
+    <tr>
+      <td>
+        <strong><samp>{{ k }}</samp></strong>
+      </td>
+      <td>
+        <pre>{{ v }}</pre>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="page-header">
+  <h1>Dateien</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Feld</th>
+      <th>Dateiname</th>
+      <th>Größe</th>
+      <th>Content-Type</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for k, v in request.FILES.items %}
+    <tr>
+      <td>
+        <strong><samp>{{ k }}</samp></strong>
+      </td>
+      <td>
+        <code>{{ v.name }}</code>
+      </td>
+      <td>
+        <code>{{ v.size|filesizeformat }}</code>
+      </td>
+      <td>
+        <code>{{ v.content_type }}</code>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<div class="page-header">
+  <h1>Query</h1>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Wert</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for k, v in request.GET.items %}
+    <tr>
+      <td>
+        <strong><samp>{{ k }}</samp></strong>
+      </td>
+      <td>
+        <pre>{{ v }}</pre>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  Request wurde nicht mit Methode <strong>POST</strong> gestellt. Kein Request-Body vorhanden!
+</div>
+{% endif %}
+{% endblock %}

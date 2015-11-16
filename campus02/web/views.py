@@ -212,3 +212,15 @@ class Http2View(TemplateView):
         context = super(Http2View, self).get_context_data(**kwargs)
         context['http2'] = self.request.META['SERVER_PROTOCOL'] == 'HTTP/2'
         return context
+
+
+class FormDataView(CsrfExemptMixin, TemplateView):
+    template_name = 'web/form-data.html'
+
+    def post(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        context = super(FormDataView, self).get_context_data(**kwargs)
+        return context

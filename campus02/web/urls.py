@@ -16,4 +16,5 @@ urlpatterns = patterns(
     url(r'^cache/control/image$', views.CacheControlImageView.as_view(), name='cache/control/image'),
     url(r'^session$', views.SessionView.as_view(), name='session'),
     url(r'^http2$', views.Http2View.as_view(), name='http2'),
+    url(r'^form-data$', views.FormDataView.as_view(), name='form-data'),
 )
