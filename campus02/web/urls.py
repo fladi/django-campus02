@@ -17,4 +17,5 @@ urlpatterns = patterns(
     url(r'^session$', views.SessionView.as_view(), name='session'),
     url(r'^http2$', views.Http2View.as_view(), name='http2'),
     url(r'^form-data$', views.FormDataView.as_view(), name='form-data'),
+    url(r'^order$', views.OrderView.as_view(), name='order'),
 )

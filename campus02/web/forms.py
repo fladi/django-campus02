@@ -5,8 +5,10 @@ from django import forms
 from django.core.urlresolvers import reverse_lazy as reverse
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Submit, Button
+from crispy_forms.layout import Layout, Submit
 from crispy_forms.bootstrap import FormActions
+
+from . import models
 
 
 class CookieForm(forms.Form):
@@ -101,3 +103,10 @@ class CacheControlForm(forms.Form):
                 Submit('save', 'Save settings'),
             )
         )
+
+
+class OrderForm(forms.ModelForm):
+
+    class Meta:
+        model = models.Order
+        exclude = ['student']

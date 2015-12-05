@@ -8,6 +8,7 @@ from PIL import ImageFont, Image, ImageDraw
 
 from django.core.urlresolvers import reverse_lazy as reverse
 from django.http import HttpResponse, HttpResponseNotModified
+from django.shortcuts import get_object_or_404
 from django.utils.http import http_date
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -15,7 +16,11 @@ from django.views.generic.edit import FormView
 
 from braces.views import CsrfExemptMixin
 
-from . import forms
+from campus02.base import models as base_models
+from . import (
+    forms,
+    models
+)
 
 
 def get_expires(session):
@@ -224,3 +229,40 @@ class FormDataView(CsrfExemptMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(FormDataView, self).get_context_data(**kwargs)
         return context
+
+
+class OrderView(CsrfExemptMixin, FormView):
+    template_name = 'web/order.html'
+    form_class = forms.OrderForm
+
+    def get_success_url(self):
+        return '?pkz={}'.format(self.request.GET.get('pkz'))
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderView, self).get_context_data(**kwargs)
+        pkz = self.request.GET.get('pkz')
+        if pkz:
+            context['pkz'] = pkz
+            try:
+                context['order'] = models.Order.objects.get(student__pk=pkz)
+            except models.Order.DoesNotExist:
+                pass
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(OrderView, self).get_form_kwargs()
+        pkz = self.request.GET.get('pkz')
+        if pkz:
+            try:
+                kwargs['instance'] = models.Order.objects.get(student__pk=pkz)
+            except:
+                pass
+        return kwargs
+
+    def form_valid(self, form):
+        pkz = self.request.GET.get('pkz')
+        if pkz:
+            order = form.save(commit=False)
+            order.student = get_object_or_404(base_models.Student, pk=pkz)
+            order.save()
+        return super(OrderView, self).form_valid(form)

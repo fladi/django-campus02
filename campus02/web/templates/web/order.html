@@ -1,0 +1,59 @@
+{% extends "base/layout.html" %}
+
+{% block title %}WEB - HTML - Bestellformular{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Bestellung</h1>
+</div>
+
+{% if not pkz %}
+<div class="alert alert-warning" role="alert">
+  Es wurde keine Personenkennzahl als Parameter <code>pkz</code> übermittelt!
+</div>
+{% else %}
+{% if form.errors %}
+Die folgenden Felder wurden fehlerhaft übermittelt:
+<dl>
+  {% for field, messages in form.errors.items %}
+  <dt>{{ field }}</dt>
+  <dd>{% for message in messages %}{{ message }}{% if not forloop.last %}, {% endif %}{% endfor %}</dd>
+  {% endfor %}
+</dl>
+{% else %}
+{% if order %}
+Ihre aktuelle Bestellung ist wie folgt:
+<dl>
+  <dt>Vorname</dt>
+  <dd>{{ order.first_name }}</dd>
+  <dt>Nachname</dt>
+  <dd>{{ order.last_name }}</dd>
+  <dt>Adresse</dt>
+  <dd>{{ order.address }}</dd>
+  <dt>PLZ</dt>
+  <dd>{{ order.zip_code }}</dd>
+  <dt>Ort</dt>
+  <dd>{{ order.city }}</dd>
+  <dt>Email</dt>
+  <dd>{{ order.email }}</dd>
+  <dt>Produkt</dt>
+  <dd>{{ order.product }}</dd>
+  <dt>Menge</dt>
+  <dd>{{ order.amount }}</dd>
+  <dt>Versand</dt>
+  <dd>{{ order.delivery }}</dd>
+  <dt>Geschenk</dt>
+  <dd>{{ order.gift }}</dd>
+  <dt>Bild</dt>
+  <dd><img src="{{ order.image.url }}" width="400" /></dd>
+  <dt>Anmerkung</dt>
+  <dd>{{ order.comment }}</dd>
+</dl>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  Es wurde noch keine vollständige Bestellung abgegeben.
+</div>
+{% endif %}
+{% endif %}
+{% endif %}
+{% endblock %}
