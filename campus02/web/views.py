@@ -3,7 +3,6 @@
 
 from datetime import datetime, timedelta
 from collections import OrderedDict
-from six.moves import cStringIO
 from PIL import ImageFont, Image, ImageDraw
 
 from django.core.urlresolvers import reverse_lazy as reverse
