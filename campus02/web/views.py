@@ -214,7 +214,7 @@ class Http2View(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Http2View, self).get_context_data(**kwargs)
-        context['http2'] = self.request.META['SERVER_PROTOCOL'] == 'HTTP/2'
+        context['http2'] = self.request.META['SERVER_PROTOCOL'] == 'HTTP/2.0'
         return context
 
 
