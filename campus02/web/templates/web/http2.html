@@ -9,11 +9,11 @@
 
 {% if http2 %}
 <div class="alert alert-success" role="alert">
-  Die Seite wurde über <strong>HTTP/2</strong> übertragen.
+  Die Seite wurde über <strong>HTTP/2.0</strong> übertragen.
 </div>
 {% else %}
 <div class="alert alert-info" role="alert">
-  Die Seite wurde über <strong>HTTP/1.1</strong> übertragen.
+  Die Seite wurde über eine ältere Version von HTTP übertragen.
 </div>
 {% endif %}
 {% endblock %}
