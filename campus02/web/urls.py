@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
 from . import views
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^cookies$', views.CookieView.as_view(), name='cookies'),
     url(r'^cache/expires$', views.CacheExpiresView.as_view(), name='cache/expires'),
     url(r'^cache/expires/image$', views.CacheExpiresImageView.as_view(), name='cache/expires/image'),
@@ -18,4 +17,4 @@ urlpatterns = patterns(
     url(r'^http2$', views.Http2View.as_view(), name='http2'),
     url(r'^form-data$', views.FormDataView.as_view(), name='form-data'),
     url(r'^order$', views.OrderView.as_view(), name='order'),
-)
+]
