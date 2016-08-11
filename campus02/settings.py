@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'django_extensions',
     'crispy_forms',
+    'django_uwsgi',
     'campus02.base',
     'campus02.web',
     'django.contrib.admin',
