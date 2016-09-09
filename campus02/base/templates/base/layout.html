@@ -28,27 +28,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-link"></span>
-                WEB
-                <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">HTTP</li>
-                <li><a href="{% url 'web:cache/expires' %}">Expires</a></li>
-                <li><a href="{% url 'web:cache/etag' %}">Etag</a></li>
-                <li><a href="{% url 'web:cache/control' %}">Cache-Control</a></li>
-                <li><a href="{% url 'web:cookies' %}">Cookies</a></li>
-                <li><a href="{% url 'web:session' %}">Session</a></li>
-                <li><a href="{% url 'web:http2' %}">HTTP/2</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">HTML</li>
-                <li><a href="{% url 'web:form-data' %}">Formular-Daten</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">CSS</li>
-              </ul>
-            </li>
+            {% include "web/menu.html" %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
