@@ -1,0 +1,18 @@
+{% extends "rest_framework/base.html" %}
+
+{% load staticfiles %}
+
+{% block bootstrap_theme %}
+{% include "base/stylesheets.html" %}
+{% endblock %}
+
+{% block title %}
+CAMPUS02 - API
+{% endblock %}
+
+{% block branding %}
+<a class="navbar-brand" href="{% url 'base:index' %}">
+  <span class="glyphicon glyphicon-blackboard"></span>
+  CAMPUS02 - RESTful API
+</a>
+{% endblock %}
