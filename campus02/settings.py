@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'campus02.base',
     'campus02.web',
+    'reversion',
     'debug_toolbar',
     'django_extensions',
     'crispy_forms',
