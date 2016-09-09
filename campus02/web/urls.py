@@ -1,9 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url
+from django.conf.urls import url, include
 
-from . import views
+from rest_framework import routers
+
+from . import (
+    api,
+    views,
+)
+
+
+router = routers.DefaultRouter()
+router.register(r'movies', views.MovieViewSet)
+router.register(r'series', views.SerieViewSet)
+router.register(r'episodes', views.EpisodeViewSet)
+router.register(r'genres', views.GenreViewSet)
 
 urlpatterns = [
     url(r'^cookies$', views.CookieView.as_view(), name='cookies'),
@@ -17,4 +29,6 @@ urlpatterns = [
     url(r'^http2$', views.Http2View.as_view(), name='http2'),
     url(r'^form-data$', views.FormDataView.as_view(), name='form-data'),
     url(r'^order$', views.OrderView.as_view(), name='order'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include(router.urls, namespace='api')),
 ]

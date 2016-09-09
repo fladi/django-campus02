@@ -14,11 +14,13 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
 from braces.views import CsrfExemptMixin
+from rest_framework import viewsets
 
 from campus02.base import models as base_models
 from . import (
     forms,
-    models
+    models,
+    serializers
 )
 
 
@@ -265,3 +267,23 @@ class OrderView(CsrfExemptMixin, FormView):
             order.student = get_object_or_404(base_models.Student, pk=pkz)
             order.save()
         return super(OrderView, self).form_valid(form)
+
+
+class MovieViewSet(viewsets.ModelViewSet):
+    queryset = models.Movie.objects.all()
+    serializer_class = serializers.MovieSerializer
+
+
+class SerieViewSet(viewsets.ModelViewSet):
+    queryset = models.Serie.objects.all()
+    serializer_class = serializers.SerieSerializer
+
+
+class EpisodeViewSet(viewsets.ModelViewSet):
+    queryset = models.Episode.objects.all()
+    serializer_class = serializers.EpisodeSerializer
+
+
+class GenreViewSet(viewsets.ModelViewSet):
+    queryset = models.Genre.objects.all()
+    serializer_class = serializers.GenreSerializer
