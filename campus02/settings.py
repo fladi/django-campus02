@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'campus02.base',
     'campus02.web',
+    'rest_framework',
     'reversion',
     'debug_toolbar',
     'django_extensions',
@@ -172,6 +173,13 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'PAGE_SIZE': 10
+}
 
 RUNSERVERPLUS_SERVER_ADDRESS_PORT = '0.0.0.0:8087'
 
