@@ -7,12 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    {% include "base/stylesheets.html" %}
     <link rel="icon" href="/favicon.ico">
     <title>CAMPUS02 - {% block title %}{% endblock %}</title>
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" rel="stylesheet">
-    {% block stylesheets %}{% endblock %}
-    <link href="{% static 'base/theme.css' %}" rel="stylesheet">
   </head>
   <body role="document">
     <nav class="navbar navbar-inverse navbar-static-top">
