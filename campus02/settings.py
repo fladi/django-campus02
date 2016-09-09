@@ -56,12 +56,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
+    'campus02.base',
+    'campus02.web',
     'debug_toolbar',
     'django_extensions',
     'crispy_forms',
     'django_uwsgi',
-    'campus02.base',
-    'campus02.web',
     'django.contrib.admin',
 )
 
