@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'campus02.web',
     'rest_framework',
     'reversion',
+    'corsheaders',
     'debug_toolbar',
     'django_extensions',
     'crispy_forms',
@@ -69,6 +70,7 @@ INSTALLED_APPS = (
 
 MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -180,6 +182,8 @@ REST_FRAMEWORK = {
     ),
     'PAGE_SIZE': 10
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 RUNSERVERPLUS_SERVER_ADDRESS_PORT = '0.0.0.0:8087'
 
