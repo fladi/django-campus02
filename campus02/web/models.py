@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from ..base.utils import RandomFileName
 
 
 class Order(models.Model):
@@ -29,10 +32,30 @@ class Movie(models.Model):
     released = models.DateField(
         _('Release date')
     )
-    poster = models.ImageField()
+    poster = models.ImageField(
+        upload_to=RandomFileName()
+    )
     genres = models.ManyToManyField('Genre')
+    runtime = models.PositiveIntegerField(
+        _('Runtime'),
+        blank=True,
+        null=True
+    )
+    tagline = models.TextField(
+        _('Tagline'),
+        blank=True,
+        null=True
+    )
     synopsis = models.TextField(
         _('Synopsis')
+    )
+    homepage = models.TextField(
+        _('Homepage'),
+        blank=True,
+        null=True
+    )
+    tmdb = models.PositiveIntegerField(
+        null=True
     )
 
     def __str__(self):
@@ -44,7 +67,9 @@ class Serie(models.Model):
         _('Movie'),
         max_length=256
     )
-    poster = models.ImageField()
+    poster = models.ImageField(
+        upload_to=RandomFileName()
+    )
     genres = models.ManyToManyField('Genre')
     synopsis = models.TextField(
         _('Synopsis')
@@ -68,7 +93,6 @@ class Episode(models.Model):
     released = models.DateField(
         _('Release date')
     )
-    poster = models.ImageField()
     synopsis = models.TextField(
         _('Synopsis')
     )
@@ -82,6 +106,30 @@ class Genre(models.Model):
         _('Name'),
         max_length=128
     )
+    tmdb = models.PositiveIntegerField(
+        null=True
+    )
 
     def __str__(self):
         return '{s.name}'.format(s=self)
+
+
+class WatchListMovie(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL
+    )
+    movie = models.ForeignKey(
+        'Movie'
+    )
+    created = models.DateTimeField(
+        _('Created'),
+        auto_now_add=True
+    )
+    watched = models.DateTimeField(
+        _('Watched'),
+        blank=True,
+        null=True
+    )
+
+    def __str__(self):
+        return '{s.movie} ({s.user})'.format(s=self)
