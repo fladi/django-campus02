@@ -3,6 +3,7 @@
 
 from datetime import datetime
 
+from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -67,6 +68,11 @@ class Student(models.Model):
         max_length=128
     )
     courses = models.ManyToManyField('Course')
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return '{s.last_name} {s.first_name} ({s.pkz})'.format(s=self)
