@@ -12,9 +12,8 @@ from . import (
 
 router = routers.DefaultRouter()
 router.register(r'movies', views.MovieViewSet)
-router.register(r'series', views.SerieViewSet)
-router.register(r'episodes', views.EpisodeViewSet)
 router.register(r'genres', views.GenreViewSet)
+router.register(r'watchlists', views.WatchlistViewSet)
 
 urlpatterns = [
     url(r'^cookies$', views.CookieView.as_view(), name='cookies'),

@@ -45,3 +45,13 @@ class GenreSerializer(serializers.ModelSerializer):
                 'view_name': 'web:api:genre-detail',
             }
         }
+
+
+class WatchlistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Watchlist
+        extra_kwargs = {
+            'url': {
+                'view_name': 'web:api:watchlist-detail',
+            }
+        }

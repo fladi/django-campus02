@@ -114,7 +114,7 @@ class Genre(models.Model):
         return '{s.name}'.format(s=self)
 
 
-class WatchListMovie(models.Model):
+class Watchlist(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL
     )
@@ -130,6 +130,11 @@ class WatchListMovie(models.Model):
         blank=True,
         null=True
     )
+
+    class Meta:
+        permissions = (
+            ('view_watchlist', 'View watchlist'),
+        )
 
     def __str__(self):
         return '{s.movie} ({s.user})'.format(s=self)

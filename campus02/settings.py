@@ -60,6 +60,7 @@ INSTALLED_APPS = (
     'campus02.base',
     'campus02.web',
     'rest_framework',
+    'guardian',
     'reversion',
     'corsheaders',
     'debug_toolbar',
@@ -177,9 +178,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ),
     'PAGE_SIZE': 10
 }

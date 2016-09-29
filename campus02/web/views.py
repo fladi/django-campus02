@@ -15,11 +15,14 @@ from django.views.generic.edit import FormView
 
 from braces.views import CsrfExemptMixin
 from rest_framework import viewsets
+from rest_framework.permissions import DjangoObjectPermissions
+from rest_framework.filters import DjangoObjectPermissionsFilter
 
 from campus02.base import models as base_models
 from . import (
     forms,
     models,
+    permissions,
     serializers
 )
 
@@ -274,16 +277,17 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MovieSerializer
 
 
-class SerieViewSet(viewsets.ModelViewSet):
-    queryset = models.Serie.objects.all()
-    serializer_class = serializers.SerieSerializer
-
-
-class EpisodeViewSet(viewsets.ModelViewSet):
-    queryset = models.Episode.objects.all()
-    serializer_class = serializers.EpisodeSerializer
-
-
 class GenreViewSet(viewsets.ModelViewSet):
     queryset = models.Genre.objects.all()
     serializer_class = serializers.GenreSerializer
+
+
+class WatchlistViewSet(viewsets.ModelViewSet):
+    queryset = models.Watchlist.objects.all()
+    serializer_class = serializers.WatchlistSerializer
+    filter_backends = [
+        DjangoObjectPermissionsFilter,
+    ]
+    permission_classes = [
+        permissions.DjangoObjectPermissions,
+    ]
