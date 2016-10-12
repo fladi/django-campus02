@@ -60,6 +60,9 @@ class Movie(models.Model):
         null=True
     )
 
+    class Meta:
+        ordering = ['title']
+        get_latest_by = 'released'
 
     def __str__(self):
         return '{s.title}'.format(s=self)
