@@ -47,7 +47,9 @@ class Movie(models.Model):
         null=True
     )
     synopsis = models.TextField(
-        _('Synopsis')
+        _('Synopsis'),
+        blank=True,
+        null=True
     )
     homepage = models.TextField(
         _('Homepage'),
