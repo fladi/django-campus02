@@ -138,3 +138,42 @@ class Watchlist(models.Model):
 
     def __str__(self):
         return '{s.movie} ({s.user})'.format(s=self)
+
+
+class Resume(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL
+    )
+    movie = models.ForeignKey(
+        'Movie'
+    )
+    position = models.PositiveIntegerField(
+        default=0
+    )
+
+    class Meta:
+        unique_together = (
+            ('user', 'movie'),
+        )
+        permissions = (
+            ('view_resume', 'View resume'),
+        )
+
+
+class Rating(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL
+    )
+    movie = models.ForeignKey(
+        'Movie'
+    )
+    date = models.DateTimeField(
+        auto_now_add=True
+    )
+    stars = models.PositiveSmallIntegerField(
+        default=0
+    )
+    comment = models.TextField(
+        blank=True,
+        null=True
+    )
