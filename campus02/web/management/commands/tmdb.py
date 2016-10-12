@@ -35,13 +35,14 @@ class Command(BaseCommand):
                 'synopsis': info.get('overview'),
                 'homepage': info.get('homepage')
             }
-            poster_path = info.get('poster_path').lstrip('/')
-            poster_url = img_base.add_path_segment(poster_path)
-            print(poster_url.as_string())
-            r = requests.get(poster_url.as_string())
-            print(r.status_code)
-            if r.status_code == 200:
-                defaults['poster'] = ContentFile(r.content, name=poster_path)
+            if info.get('poster_path', None):
+                poster_path = info.get('poster_path').lstrip('/')
+                poster_url = img_base.add_path_segment(poster_path)
+                print(poster_url.as_string())
+                r = requests.get(poster_url.as_string())
+                print(r.status_code)
+                if r.status_code == 200:
+                    defaults['poster'] = ContentFile(r.content, name=poster_path)
             movie, _ = Movie.objects.update_or_create(
                 tmdb=movie_id,
                 defaults=defaults
