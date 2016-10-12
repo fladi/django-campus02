@@ -16,7 +16,8 @@ class OrderAdmin(VersionAdmin):
 
 @admin.register(models.Movie)
 class MovieAdmin(VersionAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'released', 'runtime', 'tmdb')
+    search_fields = ('title', 'tmdb')
 
 
 class EpisodeInline(admin.TabularInline):
@@ -33,9 +34,10 @@ class SerieAdmin(VersionAdmin):
 
 @admin.register(models.Genre)
 class GenreAdmin(VersionAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'tmdb')
+    search_fields = ('name', 'tmdb')
 
 
 @admin.register(models.Watchlist)
 class WatchlistAdmin(GuardedModelAdmin):
-    list_display = ['user', 'movie']
+    list_display = ('user', 'movie')
