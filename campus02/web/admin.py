@@ -20,18 +20,6 @@ class MovieAdmin(VersionAdmin):
     search_fields = ('title', 'tmdb')
 
 
-class EpisodeInline(admin.TabularInline):
-    model = models.Episode
-
-
-@admin.register(models.Serie)
-class SerieAdmin(VersionAdmin):
-    list_display = ('title',)
-    inlines = [
-        EpisodeInline,
-    ]
-
-
 @admin.register(models.Genre)
 class GenreAdmin(VersionAdmin):
     list_display = ('name', 'tmdb')

@@ -60,44 +60,6 @@ class Movie(models.Model):
         null=True
     )
 
-    def __str__(self):
-        return '{s.title}'.format(s=self)
-
-
-class Serie(models.Model):
-    title = models.CharField(
-        _('Movie'),
-        max_length=256
-    )
-    poster = models.ImageField(
-        upload_to=RandomFileName()
-    )
-    genres = models.ManyToManyField('Genre')
-    synopsis = models.TextField(
-        _('Synopsis')
-    )
-
-    def __str__(self):
-        return '{s.title}'.format(s=self)
-
-
-class Episode(models.Model):
-    title = models.CharField(
-        _('Movie'),
-        max_length=256
-    )
-    serie = models.ForeignKey(
-        'Serie'
-    )
-    number = models.PositiveIntegerField(
-        _('Number')
-    )
-    released = models.DateField(
-        _('Release date')
-    )
-    synopsis = models.TextField(
-        _('Synopsis')
-    )
 
     def __str__(self):
         return '{s.title}'.format(s=self)
