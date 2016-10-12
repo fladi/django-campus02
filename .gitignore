@@ -62,3 +62,7 @@ target/
 
 # Development database
 db.sqlite3
+
+# Asset links
+media/
+static/
