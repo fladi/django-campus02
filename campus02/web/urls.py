@@ -8,12 +8,26 @@ from rest_framework import routers
 from . import (
     views,
 )
+from .views import (
+    hyperlink,
+    primarykey,
+)
 
 
-router = routers.DefaultRouter()
-router.register(r'movies', views.MovieViewSet)
-router.register(r'genres', views.GenreViewSet)
-router.register(r'watchlists', views.WatchlistViewSet)
+
+api_hl = routers.DefaultRouter()
+api_hl.register(r'movies', hyperlink.MovieViewSet)
+api_hl.register(r'genres', hyperlink.GenreViewSet)
+api_hl.register(r'watchlists', hyperlink.WatchlistViewSet)
+api_hl.register(r'resumes', hyperlink.ResumeViewSet)
+api_hl.register(r'ratings', hyperlink.RatingViewSet)
+
+api_pk = routers.DefaultRouter()
+api_pk.register(r'movies', primarykey.MovieViewSet)
+api_pk.register(r'genres', primarykey.GenreViewSet)
+api_pk.register(r'watchlists', primarykey.WatchlistViewSet)
+api_pk.register(r'resumes', primarykey.ResumeViewSet)
+api_pk.register(r'ratings', primarykey.RatingViewSet)
 
 urlpatterns = [
     url(r'^cookies$', views.CookieView.as_view(), name='cookies'),
@@ -28,5 +42,6 @@ urlpatterns = [
     url(r'^form-data$', views.FormDataView.as_view(), name='form-data'),
     url(r'^order$', views.OrderView.as_view(), name='order'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^api/', include(router.urls, namespace='api')),
+    url(r'^api-hl/', include(api_hl.urls, namespace='api-hl')),
+    url(r'^api-pk/', include(api_pk.urls, namespace='api-pk')),
 ]
