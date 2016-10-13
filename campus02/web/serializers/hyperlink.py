@@ -41,8 +41,14 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class WatchlistSerializer(serializers.HyperlinkedModelSerializer):
+    movie = serializers.HyperlinkedRelatedField(
+        view_name='web:api-hl:movie-detail',
+        queryset=models.Movie.objects.all(),
+        many=False
+    )
     class Meta:
         model = models.Watchlist
+        exclude = ('user',)
         extra_kwargs = {
             'url': {
                 'view_name': 'web:api-hl:watchlist-detail',
@@ -51,8 +57,14 @@ class WatchlistSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ResumeSerializer(serializers.HyperlinkedModelSerializer):
+    movie = serializers.HyperlinkedRelatedField(
+        view_name='web:api-hl:movie-detail',
+        queryset=models.Movie.objects.all(),
+        many=False
+    )
     class Meta:
         model = models.Resume
+        exclude = ('user',)
         extra_kwargs = {
             'url': {
                 'view_name': 'web:api-hl:resume-detail',
@@ -77,6 +89,11 @@ class RatingSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class HistorySerializer(serializers.HyperlinkedModelSerializer):
+    movie = serializers.HyperlinkedRelatedField(
+        view_name='web:api-hl:movie-detail',
+        queryset=models.Movie.objects.all(),
+        many=False
+    )
     class Meta:
         model = models.History
         exclude = ('user',)

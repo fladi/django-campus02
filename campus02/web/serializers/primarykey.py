@@ -32,6 +32,7 @@ class GenreSerializer(serializers.ModelSerializer):
 class WatchlistSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Watchlist
+        exclude = ('user',)
         extra_kwargs = {
             'url': {
                 'view_name': 'web:api-pk:watchlist-detail',
@@ -42,6 +43,7 @@ class WatchlistSerializer(serializers.ModelSerializer):
 class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Resume
+        exclude = ('user',)
         extra_kwargs = {
             'url': {
                 'view_name': 'web:api-pk:resume-detail',
@@ -52,6 +54,7 @@ class ResumeSerializer(serializers.ModelSerializer):
 class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Rating
+        exclude = ('user',)
         extra_kwargs = {
             'url': {
                 'view_name': 'web:api-pk:rating-detail',
