@@ -100,7 +100,7 @@ class Watchlist(models.Model):
 
     class Meta:
         permissions = (
-            ('view_watchlist', 'View watchlist'),
+            ('view_watchlist', _('View watchlist')),
         )
 
     def __str__(self):
@@ -123,7 +123,7 @@ class Resume(models.Model):
             ('user', 'movie'),
         )
         permissions = (
-            ('view_resume', 'View resume'),
+            ('view_resume', _('View resume')),
         )
 
 
@@ -145,6 +145,11 @@ class Rating(models.Model):
         null=True
     )
 
+    class Meta:
+        permissions = (
+            ('view_rating', _('View rating')),
+        )
+
 
 class History(models.Model):
     user = models.ForeignKey(
@@ -156,3 +161,8 @@ class History(models.Model):
     date = models.DateTimeField(
         auto_now_add=True
     )
+
+    class Meta:
+        permissions = (
+            ('view_history', _('View history')),
+        )
