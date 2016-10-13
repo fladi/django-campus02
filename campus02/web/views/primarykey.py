@@ -10,6 +10,7 @@ from .. import (
 from ..serializers import (
     primarykey as serializers
 )
+from ..filters import IsUserFilter
 
 
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,6 +41,7 @@ class WatchlistViewSet(viewsets.ModelViewSet):
     queryset = models.Watchlist.objects.all()
     serializer_class = serializers.WatchlistSerializer
     filter_backends = (
+        IsUserFilter,
         filters.DjangoObjectPermissionsFilter,
     )
     permission_classes = (
@@ -51,6 +53,7 @@ class ResumeViewSet(viewsets.ModelViewSet):
     queryset = models.Resume.objects.all()
     serializer_class = serializers.ResumeSerializer
     filter_backends = (
+        IsUserFilter,
         filters.DjangoObjectPermissionsFilter,
     )
     permission_classes = (
@@ -61,8 +64,22 @@ class ResumeViewSet(viewsets.ModelViewSet):
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = models.Rating.objects.all()
     serializer_class = serializers.RatingSerializer
+    filter_backends = (
+        IsUserFilter,
+        filters.DjangoObjectPermissionsFilter,
+    )
+    permission_classes = (
+        permissions.DjangoObjectPermissions,
+    )
 
 
 class HistoryViewSet(viewsets.ModelViewSet):
     queryset = models.History.objects.all()
     serializer_class = serializers.HistorySerializer
+    filter_backends = (
+        IsUserFilter,
+        filters.DjangoObjectPermissionsFilter,
+    )
+    permission_classes = (
+        permissions.DjangoObjectPermissions,
+    )
