@@ -61,10 +61,27 @@ class ResumeSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class RatingSerializer(serializers.HyperlinkedModelSerializer):
+    movie = serializers.HyperlinkedRelatedField(
+        view_name='web:api-hl:movie-detail',
+        queryset=models.Movie.objects.all(),
+        many=False
+    )
     class Meta:
         model = models.Rating
+        exclude = ('user',)
         extra_kwargs = {
             'url': {
                 'view_name': 'web:api-hl:rating-detail',
+            }
+        }
+
+
+class HistorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.History
+        exclude = ('user',)
+        extra_kwargs = {
+            'url': {
+                'view_name': 'web:api-hl:history-detail',
             }
         }

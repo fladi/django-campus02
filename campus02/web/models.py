@@ -144,3 +144,15 @@ class Rating(models.Model):
         blank=True,
         null=True
     )
+
+
+class History(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL
+    )
+    movie = models.ForeignKey(
+        'Movie'
+    )
+    date = models.DateTimeField(
+        auto_now_add=True
+    )

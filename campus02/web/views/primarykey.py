@@ -61,3 +61,8 @@ class ResumeViewSet(viewsets.ModelViewSet):
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = models.Rating.objects.all()
     serializer_class = serializers.RatingSerializer
+
+
+class HistoryViewSet(viewsets.ModelViewSet):
+    queryset = models.History.objects.all()
+    serializer_class = serializers.HistorySerializer

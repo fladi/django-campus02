@@ -29,3 +29,8 @@ class GenreAdmin(VersionAdmin):
 @admin.register(models.Watchlist)
 class WatchlistAdmin(GuardedModelAdmin):
     list_display = ('user', 'movie')
+
+
+@admin.register(models.History)
+class HistoryAdmin(GuardedModelAdmin):
+    list_display = ('user', 'movie', 'date')

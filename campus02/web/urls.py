@@ -21,6 +21,7 @@ api_hl.register(r'genres', hyperlink.GenreViewSet)
 api_hl.register(r'watchlists', hyperlink.WatchlistViewSet)
 api_hl.register(r'resumes', hyperlink.ResumeViewSet)
 api_hl.register(r'ratings', hyperlink.RatingViewSet)
+api_hl.register(r'history', hyperlink.HistoryViewSet)
 
 api_pk = routers.DefaultRouter()
 api_pk.register(r'movies', primarykey.MovieViewSet)
@@ -28,6 +29,7 @@ api_pk.register(r'genres', primarykey.GenreViewSet)
 api_pk.register(r'watchlists', primarykey.WatchlistViewSet)
 api_pk.register(r'resumes', primarykey.ResumeViewSet)
 api_pk.register(r'ratings', primarykey.RatingViewSet)
+api_pk.register(r'history', hyperlink.HistoryViewSet)
 
 urlpatterns = [
     url(r'^cookies$', views.CookieView.as_view(), name='cookies'),

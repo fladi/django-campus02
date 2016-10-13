@@ -57,3 +57,14 @@ class RatingSerializer(serializers.ModelSerializer):
                 'view_name': 'web:api-pk:rating-detail',
             }
         }
+
+
+class HistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.History
+        exclude = ('user',)
+        extra_kwargs = {
+            'url': {
+                'view_name': 'web:api-pk:history-detail',
+            }
+        }
