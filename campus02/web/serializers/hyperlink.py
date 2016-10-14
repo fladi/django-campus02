@@ -46,6 +46,10 @@ class WatchlistSerializer(serializers.HyperlinkedModelSerializer):
         queryset=models.Movie.objects.all(),
         many=False
     )
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = models.Watchlist
         exclude = ('user',)
@@ -62,6 +66,10 @@ class ResumeSerializer(serializers.HyperlinkedModelSerializer):
         queryset=models.Movie.objects.all(),
         many=False
     )
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = models.Resume
         exclude = ('user',)
@@ -78,6 +86,10 @@ class RatingSerializer(serializers.HyperlinkedModelSerializer):
         queryset=models.Movie.objects.all(),
         many=False
     )
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = models.Rating
         exclude = ('user',)
@@ -94,6 +106,10 @@ class HistorySerializer(serializers.HyperlinkedModelSerializer):
         queryset=models.Movie.objects.all(),
         many=False
     )
+    user = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
     class Meta:
         model = models.History
         exclude = ('user',)
