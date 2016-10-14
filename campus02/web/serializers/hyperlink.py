@@ -16,6 +16,7 @@ class MovieSerializer(serializers.HyperlinkedModelSerializer):
         queryset=models.Genre.objects.all(),
         many=True
     )
+
     class Meta:
         model = models.Movie
         exclude = ('tmdb',)
@@ -30,6 +31,7 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(
         view_name='web:api-hl:genre-detail'
     )
+
     class Meta:
         model = models.Genre
         fields = ('url', 'name')
