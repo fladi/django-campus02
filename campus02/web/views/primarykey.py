@@ -18,11 +18,17 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.MovieSerializer
     filter_backends = (
         filters.OrderingFilter,
+        filters.DjangoFilterBackend,
     )
     ordering_fields = (
         'title',
         'released',
         'runtime',
+    )
+    ordering = ('title',)
+    filter_fields = (
+        'title',
+        'genres',
     )
 
 
@@ -35,6 +41,7 @@ class GenreViewSet(viewsets.ReadOnlyModelViewSet):
     ordering_fields = (
         'name',
     )
+    ordering = ('name',)
 
 
 class WatchlistViewSet(viewsets.ModelViewSet):
@@ -65,7 +72,6 @@ class RatingViewSet(viewsets.ModelViewSet):
     queryset = models.Rating.objects.all()
     serializer_class = serializers.RatingSerializer
     filter_backends = (
-        IsUserFilter,
         filters.DjangoObjectPermissionsFilter,
     )
     permission_classes = (
