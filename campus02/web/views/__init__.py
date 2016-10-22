@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from base64 import b64decode
 from datetime import datetime, timedelta
 from collections import OrderedDict
+from random import SystemRandom
 from PIL import ImageFont, Image, ImageDraw
+from string import digits
 
 from django.core.urlresolvers import reverse_lazy as reverse
 from django.http import HttpResponse, HttpResponseNotModified
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.http import http_date
 from django.views.generic import View
 from django.views.generic.base import TemplateView
@@ -27,6 +30,50 @@ def get_expires(session):
         expires = datetime.now() + timedelta(minutes=2)
         session['web:cache/expires'] = expires
     return session.get('web:cache/expires')
+
+
+class BasicAuthMixin(object):
+    error_template_name = None
+    realm = 'Realm'
+
+    def get_error_template_name(self):
+        return self.error_template_name
+
+    def get_realm(self):
+        return self.realm
+
+    def get_error_context(self, request):
+        return {}
+
+    def authenticate(self, username, password):
+        return False
+
+    def dispatch(self, request, *args, **kwargs):
+        header = request.META.get('HTTP_AUTHORIZATION', None)
+        if header:
+            auth = header.split()
+            if len(auth) == 2:
+                # NOTE: Support for only basic authentication
+                if auth[0].lower() == 'basic':
+                    data = b64decode(auth[1].encode('utf8'))
+                    username, password = data.decode('utf8').split(':')
+                    if self.authenticate(username, password):
+                        return super(BasicAuthMixin, self).dispatch(
+                            request, *args, **kwargs
+                        )
+        text = 'Basic realm="{0!s}"'.format(self.get_realm())
+        template = self.get_error_template_name()
+        if template:
+            response = render(
+                request,
+                template,
+                context=self.get_error_context(request)
+            )
+        else:
+            response = HttpResponse()
+        response.status_code = 401
+        response['WWW-Authenticate'] = text
+        return response
 
 
 class CookieView(FormView):
@@ -267,3 +314,37 @@ class OrderView(CsrfExemptMixin, FormView):
             order.student = get_object_or_404(base_models.Student, pk=pkz)
             order.save()
         return super(OrderView, self).form_valid(form)
+
+
+class AuthView(TemplateView):
+    template_name = 'web/auth.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if 'web:auth/password' not in request.session:
+            password = ''.join(SystemRandom().choice(digits) for _ in range(4))
+            request.session['web:auth/password'] = password
+        return super(AuthView, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthView, self).get_context_data(**kwargs)
+        context['password'] = self.request.session.get('web:auth/password')
+        return context
+
+
+class AuthSecureView(BasicAuthMixin, TemplateView):
+    template_name = 'web/auth-secure.html'
+    error_template_name = 'web/auth-error.html'
+
+    def authenticate(self, username, password):
+        session_password = self.request.session.get('web:auth/password')
+        return username == 'user' and password == session_password
+
+    def get_error_context(self, request):
+        return {
+            'password': request.session.get('web:auth/password'),
+        }
+
+    def dispatch(self, request, *args, **kwargs):
+        if 'web:auth/password' not in request.session:
+            return redirect('web:auth')
+        return super(AuthSecureView, self).dispatch(request, *args, **kwargs)
