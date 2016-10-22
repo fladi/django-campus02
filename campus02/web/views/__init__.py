@@ -56,13 +56,15 @@ class CacheExpiresView(FormView):
         return response
 
     def get_initial(self):
+        expires = get_expires(self.request.session)
         return {
-            'expires': get_expires(self.request.session),
+            'current': expires,
+            'expires': datetime.now() + timedelta(minutes=2),
         }
 
     def get_context_data(self, **kwargs):
         context = super(CacheExpiresView, self).get_context_data(**kwargs)
-        context['expires'] = get_expires(self.request.session)
+        context.update(self.get_initial())
         return context
 
 
