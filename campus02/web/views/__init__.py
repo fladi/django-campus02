@@ -357,5 +357,5 @@ class MimeView(TemplateView):
         response = super(MimeView, self).dispatch(request, *args, **kwargs)
         mimetype = kwargs.get('type', None)
         if mimetype:
-            response['Content-Type'] = mimetype
+            response['Content-Type'] = '{0!s}; charset=utf-8'.format(mimetype)
         return response
