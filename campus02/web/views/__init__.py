@@ -116,7 +116,7 @@ class CacheExpiresView(FormView):
 
 
 class CacheExpiresImageView(View):
-    font = ImageFont.truetype('/usr/share/fonts/dejavu/DejaVuSans.ttf',25)
+    font = ImageFont.truetype('/usr/share/fonts/dejavu/DejaVuSans.ttf', 25)
     width = 500
     height = 100
 
