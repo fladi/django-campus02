@@ -98,6 +98,11 @@ urlpatterns = [
         name='auth/secure'
     ),
     url(
+        r'^mime/(?P<type>.*)?$',
+        views.MimeView.as_view(),
+        name='mime'
+    ),
+    url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')
     ),

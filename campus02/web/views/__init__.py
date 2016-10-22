@@ -348,3 +348,14 @@ class AuthSecureView(BasicAuthMixin, TemplateView):
         if 'web:auth/password' not in request.session:
             return redirect('web:auth')
         return super(AuthSecureView, self).dispatch(request, *args, **kwargs)
+
+
+class MimeView(TemplateView):
+    template_name = 'web/mime.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super(MimeView, self).dispatch(request, *args, **kwargs)
+        mimetype = kwargs.get('type', None)
+        if mimetype:
+            response['Content-Type'] = mimetype
+        return response
