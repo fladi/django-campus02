@@ -110,3 +110,33 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = models.Order
         exclude = ['student']
+
+
+class RedirectForm(forms.Form):
+    status = forms.ChoiceField(
+        label='Status',
+        choices=(
+            (301, 'Moved Permanently'),
+            (302, 'Found (Moved Temporarily)'),
+        )
+    )
+    location = forms.CharField(label='Location')
+
+    def __init__(self, *args, **kwargs):
+        super(RedirectForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'form-redirect'
+        self.helper.form_method = 'post'
+        self.helper.form_action = reverse('web:redirect')
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.helper.layout = Layout(
+            'status',
+            'location',
+            FormActions(
+                Submit('save', 'Redirect'),
+            )
+        )
+
+

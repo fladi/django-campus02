@@ -359,3 +359,21 @@ class MimeView(TemplateView):
         if mimetype:
             response['Content-Type'] = '{0!s}; charset=utf-8'.format(mimetype)
         return response
+
+
+class RedirectView(FormView):
+    template_name = 'web/redirect.html'
+    form_class = forms.RedirectForm
+
+    def get_initial(self):
+        return {
+            'location': 'https://en.wikipedia.org/wiki/URL_redirection',
+            'status': 301,
+        }
+
+    def form_valid(self, form):
+        status = int(form.cleaned_data['status'])
+        location = form.cleaned_data['location']
+        response = HttpResponse(status=status)
+        response['Location'] = location
+        return response

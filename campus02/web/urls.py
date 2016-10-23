@@ -103,6 +103,11 @@ urlpatterns = [
         name='mime'
     ),
     url(
+        r'^redirect/$',
+        views.RedirectView.as_view(),
+        name='redirect'
+    ),
+    url(
         r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework')
     ),

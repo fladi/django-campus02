@@ -1,0 +1,13 @@
+{% extends "base/layout.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}WEB - HTTP - Redirect{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Redirect</h1>
+</div>
+
+{% crispy form form.helper %}
+{% endblock %}
