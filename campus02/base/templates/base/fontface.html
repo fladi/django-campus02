@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<script type="text/javascript">
+  var font = new FontFace("Glyphicons Halflings", "url({% static 'bootstrap/fonts/glyphicons-halflings-regular.woff2' %})", {});
+  font.load();
+  font.loaded.then(function() {
+    document.fonts.add(font);
+    var show = function() {
+      document.body.style.visibility = "visible";
+    };
+    if (document.readyState != "loading"){
+      show();
+    } else {
+      document.addEventListener("DOMContentLoaded", show);
+    }
+  });
+</script>
