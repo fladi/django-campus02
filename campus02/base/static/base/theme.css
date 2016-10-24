@@ -1,5 +1,6 @@
 body {
   padding-bottom: 30px;
+  visibility: hidden;
 }
 
 .campus02-dropdown .dropdown-menu {
