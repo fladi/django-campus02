@@ -1,5 +1,6 @@
 {% extends "base/layout.html" %}
 
+{% load staticfiles %}
 {% load crispy_forms_tags %}
 
 {% block title %}WEB - HTTP - Expires{% endblock %}
@@ -21,14 +22,18 @@ Das aktuelle Expires-Datum (GMT) ist:
 {% endblock %}
 
 {% block stylesheets %}
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/smalot-bootstrap-datetimepicker/2.3.4/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="{% static 'bootstrap-datetimepicker/bootstrap-datetimepicker.min.css' %}" rel="stylesheet" />
 {% endblock %}
+
 {% block scripts %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/smalot-bootstrap-datetimepicker/2.3.4/js/bootstrap-datetimepicker.min.js"></script>
+  <script src="{% static 'moment/moment.min.js' %}"></script>
+  <script src="{% static 'moment/locale/de-at.js' %}"></script>
+  <script src="{% static 'bootstrap-datetimepicker/bootstrap-datetimepicker.min.js' %}"></script>
   <script>
   $(document).ready(function() {
     $('#id_expires').datetimepicker({
-      format: 'yyyy-mm-dd hh:ii:ss'
+      locale: 'de-at',
+      format: 'L LTS'
     });
   });
   </script>
