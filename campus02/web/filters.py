@@ -6,10 +6,12 @@ from rest_framework import filters
 
 from . import models
 
+
 class IsUserFilter(filters.BaseFilterBackend):
 
     def filter_queryset(self, request, queryset, view):
         return queryset.filter(user=request.user)
+
 
 class MovieFilter(filters.FilterSet):
     min_runtime = NumberFilter(name='runtime', lookup_expr='gte')
@@ -19,9 +21,9 @@ class MovieFilter(filters.FilterSet):
 
     class Meta:
         model = models.Movie
-        fields = (
-            'title',
-            'genres',
-            'runtime',
-            'released',
-        )
+        fields = {
+            'title': ['exact', 'icontains'],
+            'genres': ['exact'],
+            'runtime': ['exact', 'gt', 'lt'],
+            'released': ['exact', 'gt', 'lt'],
+        }
