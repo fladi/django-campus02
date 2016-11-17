@@ -58,10 +58,6 @@ class ResumeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ResumeSerializer
     filter_backends = (
         IsUserFilter,
-        filters.DjangoObjectPermissionsFilter,
-    )
-    permission_classes = (
-        permissions.DjangoObjectPermissions,
     )
 
 
@@ -81,8 +77,4 @@ class HistoryViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.HistorySerializer
     filter_backends = (
         IsUserFilter,
-        filters.DjangoObjectPermissionsFilter,
-    )
-    permission_classes = (
-        permissions.DjangoObjectPermissions,
     )
