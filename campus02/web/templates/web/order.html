@@ -24,24 +24,10 @@ Die folgenden Felder wurden fehlerhaft übermittelt:
 {% if order %}
 Ihre aktuelle Bestellung ist wie folgt:
 <dl>
-  <dt>Vorname</dt>
-  <dd>{{ order.first_name }}</dd>
-  <dt>Nachname</dt>
-  <dd>{{ order.last_name }}</dd>
-  <dt>Adresse</dt>
-  <dd>{{ order.address }}</dd>
-  <dt>PLZ</dt>
-  <dd>{{ order.zip_code }}</dd>
-  <dt>Ort</dt>
-  <dd>{{ order.city }}</dd>
-  <dt>Email</dt>
-  <dd>{{ order.email }}</dd>
+  <dt>Kunde</dt>
+  <dd>{{ order.customer }}</dd>
   <dt>Produkt</dt>
   <dd>{{ order.product }}</dd>
-  <dt>Menge</dt>
-  <dd>{{ order.amount }}</dd>
-  <dt>Versand</dt>
-  <dd>{{ order.delivery }}</dd>
   <dt>Geschenk</dt>
   <dd>{{ order.gift }}</dd>
   <dt>Bild</dt>
