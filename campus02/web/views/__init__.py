@@ -288,7 +288,7 @@ class OrderView(CsrfExemptMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super(OrderView, self).get_context_data(**kwargs)
-        pkz = self.request.GET.get('pkz')
+        pkz = self.request.GET.get('pkz', None)
         if pkz:
             context['pkz'] = pkz
             try:
@@ -299,7 +299,7 @@ class OrderView(CsrfExemptMixin, FormView):
 
     def get_form_kwargs(self):
         kwargs = super(OrderView, self).get_form_kwargs()
-        pkz = self.request.GET.get('pkz')
+        pkz = self.request.GET.get('pkz', None)
         if pkz:
             try:
                 kwargs['instance'] = models.Order.objects.get(student__pk=pkz)
@@ -308,7 +308,7 @@ class OrderView(CsrfExemptMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
-        pkz = self.request.GET.get('pkz')
+        pkz = self.request.GET.get('pkz', None)
         if pkz:
             order = form.save(commit=False)
             order.student = get_object_or_404(base_models.Student, pk=pkz)
