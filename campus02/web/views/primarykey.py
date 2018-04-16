@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from rest_framework import viewsets, filters
+from django_filters import rest_framework
 
 from .. import (
     models,
@@ -18,7 +19,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.MovieSerializer
     filter_backends = (
         filters.OrderingFilter,
-        filters.DjangoFilterBackend,
+        rest_framework.DjangoFilterBackend,
     )
     ordering_fields = (
         'title',
