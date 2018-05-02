@@ -4,17 +4,6 @@
 
 {% block content %}
 <div class="page-header">
-  <h1>HTTP-Request Body</h1>
-</div>
-
-{% if request.method == 'POST' %}
-{% if not request.FILES %}
-<pre>
-{{ request.body }}
-</pre>
-{% endif %}
-
-<div class="page-header">
   <h1>Formulardaten</h1>
 </div>
 
