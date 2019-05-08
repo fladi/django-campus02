@@ -138,13 +138,19 @@ DATABASES = {
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'localhost:11211',
+        'BACKEND': 'django_redis.cache.RedisCache',
+        #'LOCATION': 'redis://localhost:6379/1',
+        'LOCATION': 'unix:///var/run/redis/redis.sock?db=1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'PARSER_CLASS': 'redis.connection.HiredisParser',
+        },
         'KEY_PREFIX': __package__
     }
 }
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
