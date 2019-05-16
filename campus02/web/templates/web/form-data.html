@@ -3,6 +3,7 @@
 {% block title %}WEB - HTML - Formulardaten{% endblock %}
 
 {% block content %}
+{% if request.method == 'POST' %}
 <div class="page-header">
   <h1>Formulardaten</h1>
 </div>
@@ -60,6 +61,11 @@
   {% endfor %}
   </tbody>
 </table>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  Request wurde nicht mit Methode <strong>POST</strong> gestellt. Kein Request-Body vorhanden!
+</div>
+{% endif %}
 
 <div class="page-header">
   <h1>Query</h1>
@@ -85,9 +91,4 @@
   {% endfor %}
   </tbody>
 </table>
-{% else %}
-<div class="alert alert-warning" role="alert">
-  Request wurde nicht mit Methode <strong>POST</strong> gestellt. Kein Request-Body vorhanden!
-</div>
-{% endif %}
 {% endblock %}
